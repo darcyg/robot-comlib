@@ -26,32 +26,21 @@
 #include <string>
 
 #include "Message.h"
+#include "FDCommunication.h"
 
-typedef int Socket;
-
-class TCPSocket {
+class TCPSocket : public FDCommunication {
 public:
 	TCPSocket();
 	TCPSocket(const std::string &ip, uint port);
-	TCPSocket(Socket socket,struct sockaddr_in info);
+	TCPSocket(FD socket,struct sockaddr_in info);
 
 	virtual ~TCPSocket();
-
-	Socket getSocket();
-
 	void connect(const std::string &ip, uint port);
-	void close();
-
-	bool isClosed();
 
 	bool isReceiving(uint timeoutms = 0);
 
-	uint read(void* buf, uint size);
-	uint write(const void* buf, uint size);
-
 
 protected:
-	Socket msocket;
 
 	struct sockaddr_in minfo;
 };

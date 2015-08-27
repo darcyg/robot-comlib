@@ -16,9 +16,9 @@ TCPServerSocket::TCPServerSocket() {
 	 * Retour :
 	 * 	int : File descriptor du point de sortie.
 	 */
-	msocket = ::socket(AF_INET, SOCK_STREAM, 0);
+	mfd = ::socket(AF_INET, SOCK_STREAM, 0);
 
-	if(msocket == -1) {
+	if(mfd == -1) {
 		perror("socket() : Cannot create an endpoint");
 		exit(EXIT_FAILURE);
 		//TODO : Throw exception
@@ -34,42 +34,29 @@ void TCPServerSocket::bind(uint port, uint backlog) {
 	minfo.sin_port = htons(port); //Port de communication
 	minfo.sin_family = AF_INET; //IPv4
 
-	if(::bind(msocket, (struct sockaddr*)&minfo, sizeof(minfo)) == -1) {
+	if(::bind(mfd, (struct sockaddr*)&minfo, sizeof(minfo)) == -1) {
 		perror("bind() : Cannot bind");
 		exit(EXIT_FAILURE);
 		//TODO : Throw exception
 	}
 
-	if(::listen(msocket, backlog) == -1) {
+	if(::listen(mfd, backlog) == -1) {
 		perror("listen() : Cannot listen");
 		exit(EXIT_FAILURE);
 		//TODO : Throw exception
 	}
 }
 
-TCPSocket& TCPServerSocket::accept() {
+TCPSocket* TCPServerSocket::accept() {
 	//Préparation des éléments à récupérer
 	struct sockaddr_in info = {0};
 	socklen_t infosize = sizeof(info);
 
 	//On accepte la connection entrante
-	Socket clientsocket = ::accept(msocket, (struct sockaddr*)&info, &infosize);
+	FD clientsocket = ::accept(mfd, (struct sockaddr*)&info, &infosize);
 	if(clientsocket == -1) {
 		//TODO : Throw exception
 	}
 
 	return new TCPSocket(clientsocket, info);
-}
-
-void TCPServerSocket::close() {
-	if(!isClosed()) {
-		if(::close(msocket) != 0) {
-			//TODO : Throw exception
-		}
-		msocket = 0;
-	}
-}
-
-bool TCPServerSocket::isClosed() {
-	return msocket == 0;
 }

@@ -10,22 +10,16 @@
 
 #include "TCPSocket.h"
 
-class TCPServerSocket {
+class TCPServerSocket : public FDCommunication {
 public:
 	TCPServerSocket();
 
 	virtual ~TCPServerSocket();
 
 	void bind(uint port, uint backlog);
-	TCPSocket& accept();
-
-	void close();
-
-	bool isClosed();
+	TCPSocket* accept();
 
 protected:
-	Socket msocket;
-
 	struct sockaddr_in minfo;
 };
 
