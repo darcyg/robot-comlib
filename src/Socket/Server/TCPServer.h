@@ -11,14 +11,13 @@
 #include <sys/types.h>
 
 #include <vector>
-#include <thread>
 
 #include "../TCPServerSocket.h"
-#include "../FDListener.h"
+#include "../../IO/FDListener.h"
 
 class TCPServer : protected TCPServerSocket {
 public:
-	TCPServer(FDListener* listener);
+	TCPServer();
 	virtual ~TCPServer();
 
 	void launch(uint port, uint backlog);
@@ -33,6 +32,7 @@ public:
 	};
 
 	void setListener(Events* events) {mevents = events;}
+	void setFDListener(FDListener* listener) {mfdlistener = listener;}
 
 private:
 protected:

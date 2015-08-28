@@ -25,8 +25,7 @@
 
 #include <string>
 
-#include "Message.h"
-#include "FDCommunication.h"
+#include "../IO/FDCommunication.h"
 
 class TCPSocket : public FDCommunication {
 public:

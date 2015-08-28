@@ -7,10 +7,10 @@
 
 #include "TCPServer.h"
 
-TCPServer::TCPServer(FDListener* listener) : TCPServerSocket() {
-	mclients = std::vector<TCPSocket*>();
-	mfdlistener = listener;
+TCPServer::TCPServer() : TCPServerSocket()  {
+	mfdlistener = nullptr;
 	mevents = nullptr;
+	mclients = std::vector<TCPSocket*>();
 }
 
 TCPServer::~TCPServer() {
@@ -39,7 +39,7 @@ void TCPServer::run() {
 	}
 
 	//On vérifie si les clients ont envoyé des infos
-	for (std::vector< TCPSocket* >::iterator it = mclients.begin() ; it != mclients.end(); ++it) {
+	for (std::vector< TCPSocket* >::iterator it = mclients.begin() ; it != mclients.end(); ) {
 		TCPSocket* client = *it;
 
 		//Données reçues
@@ -54,6 +54,7 @@ void TCPServer::run() {
 				client->close();
 				mfdlistener->remFD(client);
 				delete(client);
+
 				it = mclients.erase(it);
 			}
 			//Nouveau message
@@ -63,9 +64,12 @@ void TCPServer::run() {
 				client->read(data, count);
 
 				if(mevents) mevents->onMessageReceived(client, data, count);
+
+				++it;
 			}
 		}
 		else {
+			++it;
 		}
 	}
 }
