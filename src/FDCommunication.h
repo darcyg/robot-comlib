@@ -16,6 +16,8 @@ typedef int FD;
 
 class FDCommunication {
 public :
+	FDCommunication();
+
 	uint read(void* buf, uint size);
 	uint write(const void* buf, uint size);
 

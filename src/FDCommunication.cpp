@@ -7,6 +7,10 @@
 
 #include "FDCommunication.h"
 
+FDCommunication::FDCommunication() {
+	mfd = 0;
+}
+
 uint FDCommunication::read(void* buf, uint size) {
 	if(isClosed()) {
 		return 0;
