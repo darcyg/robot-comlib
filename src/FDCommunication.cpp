@@ -44,6 +44,11 @@ void FDCommunication::close() {
 	}
 }
 
+uint FDCommunication::getReadSize() {
+	uint count;
+	::ioctl(mfd, FIONREAD, &count);
+	return count;
+}
 
 bool FDCommunication::isClosed() {
 	return mfd == 0;

@@ -10,6 +10,7 @@
 
 #include <unistd.h>
 #include <sys/types.h>
+#include <sys/ioctl.h>
 
 typedef int FD;
 
@@ -17,6 +18,8 @@ class FDCommunication {
 public :
 	uint read(void* buf, uint size);
 	uint write(const void* buf, uint size);
+
+	uint getReadSize();
 
 	FD getFD() {return mfd;}
 
