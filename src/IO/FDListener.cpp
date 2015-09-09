@@ -28,7 +28,7 @@ void FDListener::remFD(FDCommunication* FD) {
 	}
 }
 
-void FDListener::listen() {
+void FDListener::listen() throw(IOException) {
 	//On remet à zéro
 	FD_ZERO(&mfdset);
 
@@ -53,7 +53,7 @@ void FDListener::listen() {
 	 * à 0 seconde et 0 useconde pour que se soit instantané.
 	 */
 	if(::select(mfdmax + 1, &mfdset, nullptr, nullptr, mtimeout) == -1) {
-		//TODO : Throw exception
+		throw IOException();
 	}
 
 }

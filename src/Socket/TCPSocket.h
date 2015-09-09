@@ -25,16 +25,17 @@
 
 #include <string>
 
+#include "SocketException.h"
 #include "../IO/FDCommunication.h"
 
 class TCPSocket : public FDCommunication {
 public:
-	TCPSocket();
+	TCPSocket() throw(SocketException);
 	TCPSocket(const std::string &ip, uint port);
 	TCPSocket(FD socket,struct sockaddr_in info);
 
 	virtual ~TCPSocket();
-	void connect(const std::string &ip, uint port);
+	void connect(const std::string &ip, uint port) throw(SocketException);
 
 	bool isReceiving(uint timeoutms = 0);
 

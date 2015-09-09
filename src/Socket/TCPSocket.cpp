@@ -7,7 +7,7 @@
 
 #include "TCPSocket.h"
 
-TCPSocket::TCPSocket() {
+TCPSocket::TCPSocket() throw(SocketException) {
 	/* Crée un point d'entrée-sortie représenté par un file descriptor permettant au process de communiquer avec l'extérieur.
 	 * Paramètres :
 	 * 	int domain : Famille de protocole de communication. AF_INET correspond à l'IPv4.
@@ -21,7 +21,7 @@ TCPSocket::TCPSocket() {
 	if(mfd == -1) {
 		perror("socket() : Cannot create an endpoint");
 		exit(EXIT_FAILURE);
-		//TODO : Throw exception
+		throw SocketException();
 	}
 }
 
@@ -38,9 +38,9 @@ TCPSocket::TCPSocket(FD socket, struct sockaddr_in info) {
 	minfo = info;
 }
 
-void TCPSocket::connect(const std::string &ip, uint port) {
+void TCPSocket::connect(const std::string &ip, uint port) throw(SocketException) {
 	if(isClosed()) {
-		//TODO : Throw exception
+		throw SocketException();
 	}
 	else {
 
@@ -54,8 +54,7 @@ void TCPSocket::connect(const std::string &ip, uint port) {
 		 */
 		if(::connect(mfd, (struct sockaddr*)&minfo, sizeof(minfo)) == -1) {
 			perror("connect() : Cannot connect to server");
-			exit(EXIT_FAILURE);
-			//TODO : Throw exception
+			throw SocketException();
 		}
 	}
 }

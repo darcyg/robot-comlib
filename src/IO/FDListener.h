@@ -21,7 +21,7 @@ public:
 	void addFD(FDCommunication* newFD);
 	void remFD(FDCommunication* FD);
 
-	void listen();
+	void listen() throw(IOException);
 
 	bool isFDReceiving(FDCommunication* FD);
 protected:

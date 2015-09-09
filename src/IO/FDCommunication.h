@@ -12,20 +12,22 @@
 #include <sys/types.h>
 #include <sys/ioctl.h>
 
+#include "IOException.h"
+
 typedef int FD;
 
 class FDCommunication {
 public :
 	FDCommunication();
 
-	uint read(void* buf, uint size);
-	uint write(const void* buf, uint size);
+	uint read(void* buf, uint size) throw(IOException);
+	uint write(const void* buf, uint size) throw(IOException);
 
 	uint getReadSize();
 
 	FD getFD() {return mfd;}
 
-	void close();
+	void close() throw(IOException);
 	bool isClosed();
 protected :
 	FD mfd;

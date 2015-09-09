@@ -12,12 +12,12 @@
 
 class TCPServerSocket : public FDCommunication {
 public:
-	TCPServerSocket();
+	TCPServerSocket() throw(SocketException);
 
 	virtual ~TCPServerSocket();
 
-	void bind(uint port, uint backlog);
-	TCPSocket* accept();
+	void bind(uint port, uint backlog) throw(SocketException);
+	TCPSocket* accept() throw(SocketException);
 
 protected:
 	struct sockaddr_in minfo;
