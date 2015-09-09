@@ -49,7 +49,7 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
-					<fileInfo id="cdt.managedbuild.config.gnu.exe.debug.305420299.1490507993" name="ASyncServer.cpp" rcbsApplicability="disable" resourcePath="src/Server/DeamonServer.cpp" toolsToInvoke="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.146177918.743223303">
+					<fileInfo id="cdt.managedbuild.config.gnu.exe.debug.305420299.1490507993" name="ASyncServer.cpp" rcbsApplicability="disable" resourcePath="src/Socket/Server/TCPServer.cpp" toolsToInvoke="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.146177918.743223303">
 						<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.146177918.743223303" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.146177918">
 							<option id="gnu.cpp.compiler.option.dialect.std.11460581" name="Language standard" superClass="gnu.cpp.compiler.option.dialect.std" value="gnu.cpp.compiler.dialect.default" valueType="enumerated"/>
 							<option id="gnu.cpp.compiler.option.dialect.flags.617646271" name="Other dialect flags" superClass="gnu.cpp.compiler.option.dialect.flags" value="" valueType="string"/>
