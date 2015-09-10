@@ -9,6 +9,9 @@
 #define UARTSERIAL_H_
 
 #include "../IO/FDCommunication.h"
+#include <stdint.h>
+
+#define UART_BUFFER_MAX_SIZE 128
 
 class UARTSerial : public FDCommunication {
 public:
