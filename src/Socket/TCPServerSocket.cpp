@@ -19,7 +19,6 @@ TCPServerSocket::TCPServerSocket() throw(SocketException) {
 	mfd = ::socket(AF_INET, SOCK_STREAM, 0);
 
 	if(mfd == -1) {
-		perror("socket() : Cannot create an endpoint");
 		throw SocketException();
 	}
 }
@@ -39,7 +38,6 @@ void TCPServerSocket::bind(uint port, uint backlog) throw(SocketException) {
 	}
 
 	if(::listen(mfd, backlog) == -1) {
-		perror("listen() : Cannot listen");
 		throw SocketException();
 	}
 }

@@ -19,8 +19,6 @@ TCPSocket::TCPSocket() throw(SocketException) {
 	mfd = ::socket(AF_INET, SOCK_STREAM, 0);
 
 	if(mfd == -1) {
-		perror("socket() : Cannot create an endpoint");
-		exit(EXIT_FAILURE);
 		throw SocketException();
 	}
 }
@@ -53,7 +51,6 @@ void TCPSocket::connect(const std::string &ip, uint port) throw(SocketException)
 		 * la connection s'effectuera.
 		 */
 		if(::connect(mfd, (struct sockaddr*)&minfo, sizeof(minfo)) == -1) {
-			perror("connect() : Cannot connect to server");
 			throw SocketException();
 		}
 	}
