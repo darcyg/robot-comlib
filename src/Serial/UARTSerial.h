@@ -11,23 +11,31 @@
 
 #include "../IO/FDCommunication.h"
 #include <stdint.h>
-#include "stdio.h"
-#include "string.h"
 #include "unistd.h"
 #include "fcntl.h"
-#include "errno.h"
 #include "sys/types.h"
 #include "sys/stat.h"
 #include <stdlib.h>
 #include "stdarg.h"
 #include <termios.h>
+#include <stdio.h>
+#include <string.h>
+#include <errno.h>
 
-#define UART_BUFFER_MAX_SIZE 128
+#include <string>
 
 class UARTSerial : public FDCommunication {
 public:
-	UARTSerial(char* device);
+	UARTSerial();
 	virtual ~UARTSerial();
+
+	void open(const std::string& device) throw(IOException);
+
+
+private:
+	void init();
+
+protected:
 
 };
 
