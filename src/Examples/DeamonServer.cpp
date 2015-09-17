@@ -9,7 +9,7 @@
 
 DeamonServer::DeamonServer() : FDListener() {
 	mtcpserver.setFDListener(this);
-	mtcpserver.setListener(this);
+	mtcpserver.setEvents(this);
 	mtcpserver.launch(3000, 10);
 }
 

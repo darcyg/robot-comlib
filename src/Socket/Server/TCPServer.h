@@ -31,7 +31,7 @@ public:
 		virtual void onMessageReceived(TCPSocket* client, uint8_t buffer[], uint8_t len) const = 0;
 	};
 
-	void setListener(Events* events) {mevents = events;}
+	void setEvents(Events* events) {mevents = events;}
 	void setFDListener(FDListener* listener) {mfdlistener = listener;}
 
 private:

@@ -8,12 +8,19 @@
 #ifndef SOCKET_SOCKETEXCEPTION_H_
 #define SOCKET_SOCKETEXCEPTION_H_
 
-#include <exception>
+#include <errno.h>
+#include <string.h>
 
-class SocketException: public std::exception {
-	virtual const char* what() const throw() {
-		return "SocketException";
-	}
+#include <stdexcept>
+
+class SocketException: public std::runtime_error {
+public:
+	SocketException();
+
+	virtual const char* what() const throw();
+
+private:
+	int merrno;
 };
 
 #endif /* SOCKET_SOCKETEXCEPTION_H_ */

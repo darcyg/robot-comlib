@@ -7,3 +7,11 @@
 
 #include "SocketException.h"
 
+SocketException::SocketException() : std::runtime_error("SocketException") {
+	merrno = errno;
+}
+
+
+const char* SocketException::what() const throw ()  {
+	return strcat("SocketException : ", strerror(merrno));
+}

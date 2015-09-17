@@ -8,12 +8,18 @@
 #ifndef IO_IOEXCEPTION_H_
 #define IO_IOEXCEPTION_H_
 
-#include <exception>
+#include <errno.h>
+#include <string.h>
 
-class IOException : std::exception {
-	virtual const char* what() const throw() {
-		return "IOException";
-	}
+#include <stdexcept>
+
+class IOException : std::runtime_error {
+public :
+	IOException();
+	virtual const char* what() const throw();
+
+private:
+	int merrno;
 };
 
 #endif /* IO_IOEXCEPTION_H_ */
