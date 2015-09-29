@@ -1,0 +1,11 @@
+#!/bin/bash
+sudo cp Debug/libarietta-comlib.so /usr/lib/libarietta-comlib.so
+sudo mkdir /usr/include/arietta-comlib
+sudo mkdir /usr/include/arietta-comlib/IO
+sudo mkdir /usr/include/arietta-comlib/Serial
+sudo mkdir /usr/include/arietta-comlib/Socket
+sudo cp src/IO/*.h /usr/include/arietta-comlib/IO/
+sudo cp src/Serial/*.h /usr/include/arietta-comlib/Serial/
+sudo cp src/Socket/*.h /usr/include/arietta-comlib/Socket/
+
+
