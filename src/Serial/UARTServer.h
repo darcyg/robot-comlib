@@ -22,6 +22,8 @@ public:
 	void launch(const std::string& device);
 	bool isConnected();
 
+	void run();
+
 	class Events {
 	public:
 		virtual void onConnected(UARTServer* uart) = 0;
@@ -36,7 +38,6 @@ public:
 
 private:
 	using UARTSerial::open;
-	void run();
 protected:
 	Events* mevents;
 	FDListener* mfdlistener;

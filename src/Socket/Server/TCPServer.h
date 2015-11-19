@@ -21,6 +21,7 @@ public:
 	virtual ~TCPServer();
 
 	void launch(uint port, uint backlog);
+	void run();
 
 	class Events {
 	public:
@@ -35,7 +36,6 @@ public:
 private:
 	using TCPServerSocket::bind;
 	using TCPServerSocket::accept;
-	void run();
 protected:
 	std::vector<TCPSocket*> mclients;
 	Events* mevents;
