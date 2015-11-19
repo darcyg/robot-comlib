@@ -19,17 +19,15 @@ class UARTServer : public UARTSerial {
 public:
 	UARTServer();
 	virtual ~UARTServer();
-
-	void run();
 	void launch(const std::string& device);
 	bool isConnected();
 
 	class Events {
 	public:
-		virtual void onConnected() const = 0;
-		virtual void onDisconnected() const = 0;
-		virtual void onConnectionFailed() const = 0;
-		virtual void onMessageReceived(uint8_t buffer[], uint8_t len) const = 0;
+		virtual void onConnected(UARTServer* uart) = 0;
+		virtual void onDisconnected(UARTServer* uart) = 0;
+		virtual void onConnectionFailed(UARTServer* uart) = 0;
+		virtual void onMessageReceived(UARTServer* uart, uint8_t buffer[], uint32_t len) = 0;
 	};
 
 	void setEvents(Events* events) {mevents = events;}
@@ -37,6 +35,8 @@ public:
 
 
 private:
+	using UARTSerial::open;
+	void run();
 protected:
 	Events* mevents;
 	FDListener* mfdlistener;

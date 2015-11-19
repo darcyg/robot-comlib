@@ -22,7 +22,7 @@ void UARTServer::run() {
 
 		// Déconnecté
 		if(count == 0) {
-			if(mevents) mevents->onDisconnected();
+			if(mevents) mevents->onDisconnected(this);
 			close();
 			mfdlistener->remFD(this);
 		}
@@ -32,7 +32,7 @@ void UARTServer::run() {
 
 			read(data, count);
 
-			if(mevents) mevents->onMessageReceived(data, count);
+			if(mevents) mevents->onMessageReceived(this, data, count);
 		}
 	}
 }
@@ -40,13 +40,14 @@ void UARTServer::run() {
 void UARTServer::launch(const std::string& device) {
 	try {
 		open(device);
-		if(mevents) mevents->onConnected();
+		if(mevents) mevents->onConnected(this);
 	}
 	catch(IOException& e) {
-		if(mevents) mevents->onConnectionFailed();
+		if(mevents) mevents->onConnectionFailed(this);
 	}
 	mfdlistener->addFD(this);
 }
 
 bool UARTServer::isConnected() {
+	return isClosed();
 }

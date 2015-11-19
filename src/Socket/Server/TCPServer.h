@@ -22,19 +22,20 @@ public:
 
 	void launch(uint port, uint backlog);
 
-	void run();
-
 	class Events {
 	public:
-		virtual void onClientConnected(TCPSocket* client) const = 0;
-		virtual void onClientDisconnected(TCPSocket* client) const = 0;
-		virtual void onMessageReceived(TCPSocket* client, uint8_t buffer[], uint8_t len) const = 0;
+		virtual void onClientConnected(TCPSocket* client) = 0;
+		virtual void onClientDisconnected(TCPSocket* client) = 0;
+		virtual void onMessageReceived(TCPSocket* client, uint8_t buffer[], uint8_t len) = 0;
 	};
 
 	void setEvents(Events* events) {mevents = events;}
 	void setFDListener(FDListener* listener) {mfdlistener = listener;}
 
 private:
+	using TCPServerSocket::bind;
+	using TCPServerSocket::accept;
+	void run();
 protected:
 	std::vector<TCPSocket*> mclients;
 	Events* mevents;

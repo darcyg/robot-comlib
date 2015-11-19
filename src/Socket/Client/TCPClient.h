@@ -25,10 +25,10 @@ public:
 
 	class Events {
 	public:
-		virtual void onConnected() const = 0;
-		virtual void onConnectionFailed() const = 0;
-		virtual void onDisconnected() const = 0;
-		virtual void onMessageReceived(uint8_t buffer[], uint8_t len) const = 0;
+		virtual void onConnected(TCPClient* client) = 0;
+		virtual void onConnectionFailed(TCPClient* client) = 0;
+		virtual void onDisconnected(TCPClient* client) = 0;
+		virtual void onMessageReceived(TCPClient* client, uint8_t buffer[], uint8_t len) = 0;
 	};
 
 	void setEvents(Events* events) {mevents = events;}
@@ -40,6 +40,7 @@ private:
 	std::thread* mthread;
 
 	void privaterun();
+	using TCPSocket::connect;
 };
 
 #endif /* SOCKET_CLIENT_TCPCLIENT_H_ */

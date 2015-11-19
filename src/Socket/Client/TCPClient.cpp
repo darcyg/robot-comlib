@@ -26,12 +26,12 @@ void TCPClient::launch(std::string address, int port) {
 
 	try {
 		connect(address, port);
-		if(mevents) mevents->onConnected();
+		if(mevents) mevents->onConnected(this);
 			mrunning = true;
 			mthread = new std::thread(&TCPClient::privaterun, this);
 	}
 	catch(SocketException &e) {
-		if(mevents) mevents->onConnectionFailed();
+		if(mevents) mevents->onConnectionFailed(this);
 	}
 }
 
@@ -49,7 +49,7 @@ void TCPClient::privaterun() {
 
 		// Déconnecté
 		if(count == 0) {
-			if(mevents) mevents->onDisconnected();
+			if(mevents) mevents->onDisconnected(this);
 			close();
 			remFD(this);
 			mrunning = false;
@@ -60,7 +60,7 @@ void TCPClient::privaterun() {
 
 			read(data, count);
 
-			if(mevents) mevents->onMessageReceived(data, count);
+			if(mevents) mevents->onMessageReceived(this, data, count);
 		}
 	}
 }

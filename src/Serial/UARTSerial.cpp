@@ -17,8 +17,7 @@ UARTSerial::~UARTSerial(){
 }
 
 void UARTSerial::open(const std::string& device) throw(IOException) {
-	std::string path = "/dev/" + device;
-	mfd = ::open(path.c_str(), O_RDWR | O_NOCTTY | O_NONBLOCK);
+	mfd = ::open(device.c_str(), O_RDWR | O_NOCTTY | O_NONBLOCK);
 	if (mfd < 0) {
 		throw IOException();
 	}
