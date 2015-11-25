@@ -8,7 +8,7 @@ This C++ library provide tools to communicate with TCP and UART protocols on an 
 
 * **FDCommunication** : This class is the C++ representation of a Linux file descriptor. It provides basis functions for files descriptors like *read*, *write* and *close*.
 
-* **FDListener** : This one allows you to watch Linux files descriptors inputs. You can add (*addFD*) and remove (*remFD*) files descriptors and then use the function *listen*. *listen* will wait until there is an input on one of the files descriptors. Finally you can check witch file descriptor has received something with the function *isReceiving*. It avoids your task to be locked by a *read* function when you have several files descriptors to watch.
+* **FDListener** : This one allows you to watch Linux files descriptors inputs. You can add (*addFD*) and remove (*remFD*) files descriptors and then use the function *listen*. *listen* will wait until there is an input on one of the files descriptors. Finally you can check which file descriptor has received something with the function *isReceiving*. It avoids your task to be locked by a *read* function when you have several files descriptors to watch.
 
 ## Low-level communication tools
 
