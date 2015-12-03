@@ -49,5 +49,5 @@ void UARTServer::launch(const std::string& device) {
 }
 
 bool UARTServer::isConnected() {
-	return isClosed();
+	return !isClosed();
 }
