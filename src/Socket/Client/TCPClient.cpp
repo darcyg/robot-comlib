@@ -61,6 +61,7 @@ void TCPClient::privaterun() {
 			read(data, count);
 
 			if(mevents) mevents->onMessageReceived(this, data, count);
+			delete(data);
 		}
 	}
 }

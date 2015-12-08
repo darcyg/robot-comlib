@@ -23,7 +23,7 @@ public :
 	uint read(void* buf, uint size) throw(IOException);
 	uint write(const void* buf, uint size) throw(IOException);
 
-	uint getReadSize();
+	uint getReadSize() throw(IOException);
 
 	FD getFD() {return mfd;}
 

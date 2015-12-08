@@ -46,9 +46,11 @@ void FDCommunication::close() throw(IOException) {
 	}
 }
 
-uint FDCommunication::getReadSize() {
+uint FDCommunication::getReadSize()  throw(IOException) {
 	uint count;
-	::ioctl(mfd, FIONREAD, &count);
+	if(::ioctl(mfd, FIONREAD, &count) == -1) {
+		 throw IOException();
+	}
 	return count;
 }
 

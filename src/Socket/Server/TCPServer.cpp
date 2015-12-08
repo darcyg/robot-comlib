@@ -64,7 +64,7 @@ void TCPServer::run() {
 				client->read(data, count);
 
 				if(mevents) mevents->onMessageReceived(client, data, count);
-
+				delete(data);
 				++it;
 			}
 		}
