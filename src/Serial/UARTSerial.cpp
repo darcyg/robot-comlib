@@ -68,6 +68,6 @@ void UARTSerial::init(){
 	cfsetospeed(&tty_attributes, B9600);
 	cfsetispeed(&tty_attributes, B9600);
 	tcsetattr(mfd, TCSANOW, &tty_attributes);
-	sleep(1);
+	usleep(100);
 }
 
