@@ -27,7 +27,8 @@ TCPSocket::~TCPSocket() {
 	close();
 }
 
-TCPSocket::TCPSocket(const std::string &ip, uint port) : TCPSocket() {
+TCPSocket::TCPSocket(const std::string &ip, uint port) {
+	TCPSocket();
 	connect(ip, port);
 }
 

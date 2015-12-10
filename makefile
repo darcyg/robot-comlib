@@ -25,7 +25,7 @@ LIB_INSTALL_DIR := /usr/lib
 INC_INSTALL_DIR := /usr/include/$(LIBNAME)
 
 %.o: %.cpp
-	g++ -Wall -c -std=c++11 -fPIC -pthread -o "$@" "$<"
+	g++ -Wall -c -std=c++0x -fPIC -pthread -o "$@" "$<"
 
 binary: $(OBJS)
 	g++ -shared -o "libarietta-comlib.so" $(OBJS) -l $(LIBS)
