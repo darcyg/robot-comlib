@@ -27,7 +27,7 @@ public:
 	public:
 		virtual void onClientConnected(TCPSocket* client) = 0;
 		virtual void onClientDisconnected(TCPSocket* client) = 0;
-		virtual void onMessageReceived(TCPSocket* client, uint8_t buffer[], uint8_t len) = 0;
+		virtual void onMessageReceived(TCPSocket* client, uint8_t buffer[], uint32_t len) = 0;
 	};
 
 	void setEvents(Events* events) {mevents = events;}
