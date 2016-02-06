@@ -34,11 +34,8 @@ void UARTSerial::init(){
 		fprintf(stderr, "failed to get attr: %d, %s\n", mfd, strerror(errno));
 	}
 
-	// Set the baud rates to 230400
-	cfsetispeed(&options, B230400);
-
-	// Set the baud rates to 230400
-	cfsetospeed(&options, B230400);
+	cfsetispeed(&options, mbaudrate);
+	cfsetospeed(&options, mbaudrate);
 
 	cfmakeraw(&options);
 	options.c_cflag |= (CLOCAL | CREAD);   // Enable the receiver and set local mode
