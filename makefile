@@ -17,7 +17,7 @@ INC := $(SRCS:.cpp=.h)
 
 LIBS := pthread
 
-LIBNAME = arietta-comlib
+LIBNAME = robot-comlib
 
 BINARY := lib$(LIBNAME).so
 
@@ -28,7 +28,7 @@ INC_INSTALL_DIR := /usr/include/$(LIBNAME)
 	g++ -Wall -c -std=c++0x -fPIC -pthread -o "$@" "$<"
 
 binary: $(OBJS)
-	g++ -shared -o "libarietta-comlib.so" $(OBJS) -l $(LIBS)
+	g++ -shared -o $(BINARY) $(OBJS) -l $(LIBS)
 
 clean_obj:
 	rm $(OBJS)

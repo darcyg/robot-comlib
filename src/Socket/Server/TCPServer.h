@@ -33,6 +33,8 @@ public:
 	void setEvents(Events* events) {mevents = events;}
 	void setFDListener(FDListener* listener) {mfdlistener = listener;}
 
+	std::vector<TCPSocket*> getClients() {return mclients;}
+
 private:
 	using TCPServerSocket::bind;
 	using TCPServerSocket::accept;
