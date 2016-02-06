@@ -34,8 +34,6 @@ void UARTSerial::init(){
 		fprintf(stderr, "failed to get attr: %d, %s\n", mfd, strerror(errno));
 	}
 
-
-
 	cfmakeraw(&options);
 	options.c_cflag |= (CLOCAL | CREAD);   // Enable the receiver and set local mode
 	options.c_cflag &= ~CSTOPB;            // 1 stop bit
