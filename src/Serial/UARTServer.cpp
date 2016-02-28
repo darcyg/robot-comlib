@@ -43,6 +43,7 @@ void UARTServer::launch(const std::string& device) {
 		if(mevents) mevents->onConnected(this);
 	}
 	catch(IOException& e) {
+		//close();
 		if(mevents) mevents->onConnectionFailed(this);
 	}
 	mfdlistener->addFD(this);

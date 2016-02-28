@@ -5,12 +5,12 @@
  *      Author: gabriel
  */
 
+#include <iostream>
+
 #include "TCPServer.h"
 
-TCPServer::TCPServer() : TCPServerSocket()  {
-	mfdlistener = nullptr;
-	mevents = nullptr;
-	mclients = std::vector<TCPSocket*>();
+TCPServer::TCPServer() : TCPServerSocket(), mclients(), mevents(nullptr), mfdlistener(nullptr) {
+
 }
 
 TCPServer::~TCPServer() {
@@ -72,4 +72,18 @@ void TCPServer::run() {
 			++it;
 		}
 	}
+}
+
+bool TCPServer::sendAll(const void* buf, uint size) {
+	bool res = true;
+	for(std::vector<TCPSocket*>::iterator it = mclients.begin(); it != mclients.end(); ++it) {
+		try {
+
+			(*it)->write(buf, size);
+		}
+		catch(IOException& e) {
+			res = false;
+		}
+	}
+	return res;
 }
