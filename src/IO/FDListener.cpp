@@ -7,6 +7,7 @@
 
 #include "FDListener.h"
 
+int exit_request;
 
 
 void FDListener::signalHandler( int signum )
