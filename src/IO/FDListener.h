@@ -17,7 +17,6 @@
 
 #include "FDCommunication.h"
 
-int exit_request;
 
 
 class FDListener {
