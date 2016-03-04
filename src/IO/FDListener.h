@@ -8,11 +8,17 @@
 #ifndef FDLISTENER_H_
 #define FDLISTENER_H_
 
+#include <iostream>
+
 #include <sys/select.h>
 
 #include <vector>
+#include <signal.h>
 
 #include "FDCommunication.h"
+
+int exit_request;
+
 
 class FDListener {
 public:
@@ -24,6 +30,9 @@ public:
 	void listen() throw(IOException);
 
 	bool isFDReceiving(FDCommunication* FD);
+
+	static void signalHandler( int signum );
+
 protected:
 private:
 	fd_set mfdset; //Stocke les files descriptors (FDs) à survveiller.
