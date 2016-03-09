@@ -15,7 +15,7 @@
 #include "../TCPServerSocket.h"
 #include "../../IO/FDListener.h"
 
-class TCPServer : protected TCPServerSocket {
+class TCPServer : public TCPServerSocket {
 public:
 	TCPServer();
 	virtual ~TCPServer();

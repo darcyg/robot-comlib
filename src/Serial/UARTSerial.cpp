@@ -19,10 +19,11 @@ UARTSerial::~UARTSerial(){
 void UARTSerial::open(const std::string& device) throw(IOException) {
 	mfd = ::open(device.c_str(), O_RDWR | O_NOCTTY);
 	if (mfd < 0) {
+		mfd = 0;
 		throw IOException();
 	}
 	else {
-		init();
+		//init();
 	}
 }
 
