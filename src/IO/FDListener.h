@@ -30,7 +30,6 @@ public:
 
 	bool isFDReceiving(FDCommunication* FD);
 
-	static void signalHandler( int signum );
 
 protected:
 private:
