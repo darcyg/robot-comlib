@@ -5,27 +5,9 @@
 			<provider copy-of="extension" id="org.eclipse.cdt.ui.UserLanguageSettingsProvider"/>
 			<provider-reference id="org.eclipse.cdt.core.ReferencedProjectsLanguageSettingsProvider" ref="shared-provider"/>
 			<provider-reference id="org.eclipse.cdt.managedbuilder.core.MBSLanguageSettingsProvider" ref="shared-provider"/>
-<<<<<<< Upstream, based on branch 'master' of https://github.com/IR-RC/robot-comlib.git
-<<<<<<< Upstream, based on branch 'master' of https://github.com/IR-RC/robot-comlib.git
-<<<<<<< Upstream, based on branch 'master' of https://github.com/IR-RC/robot-comlib.git
 			<provider class="org.eclipse.cdt.managedbuilder.language.settings.providers.GCCBuiltinSpecsDetector" console="false" env-hash="1024423608945417611" id="org.eclipse.cdt.managedbuilder.core.GCCBuiltinSpecsDetector" keep-relative-paths="false" name="CDT GCC Built-in Compiler Settings" parameter="${COMMAND} ${FLAGS} -E -P -v -dD -std=c++11 -pthread  &quot;${INPUTS}&quot;">
-=======
-=======
-<<<<<<< Upstream, based on signal
->>>>>>> 5de05f5 # changed lib name + Add accessor in TCPServer
 			<provider class="org.eclipse.cdt.managedbuilder.language.settings.providers.GCCBuiltinSpecsDetector" console="false" env-hash="1036696716919828483" id="org.eclipse.cdt.managedbuilder.core.GCCBuiltinSpecsDetector" keep-relative-paths="false" name="CDT GCC Built-in Compiler Settings" parameter="${COMMAND} ${FLAGS} -E -P -v -dD -std=c++11 -pthread  &quot;${INPUTS}&quot;">
-<<<<<<< Upstream, based on branch 'master' of https://github.com/IR-RC/robot-comlib.git
->>>>>>> b7fc861 use of pselect
-=======
-=======
-=======
->>>>>>> b9c1c13 Rebase
 			<provider class="org.eclipse.cdt.managedbuilder.language.settings.providers.GCCBuiltinSpecsDetector" console="false" env-hash="1024423608945417611" id="org.eclipse.cdt.managedbuilder.core.GCCBuiltinSpecsDetector" keep-relative-paths="false" name="CDT GCC Built-in Compiler Settings" parameter="${COMMAND} ${FLAGS} -E -P -v -dD -std=c++11 -pthread  &quot;${INPUTS}&quot;">
-<<<<<<< Upstream, based on branch 'master' of https://github.com/IR-RC/robot-comlib.git
->>>>>>> 8daa1d8 # changed lib name + Add accessor in TCPServer
->>>>>>> 5de05f5 # changed lib name + Add accessor in TCPServer
-=======
->>>>>>> b9c1c13 Rebase
 				<language-scope id="org.eclipse.cdt.core.gcc"/>
 				<language-scope id="org.eclipse.cdt.core.g++"/>
 			</provider>
