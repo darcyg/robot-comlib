@@ -35,6 +35,7 @@ protected:
 private:
 	fd_set mfdset; //Stocke les files descriptors (FDs) à survveiller.
 	std::vector<FDCommunication*> mfdwatched;
+	sigset_t morig_mask;
 	int mfdmax; //File descriptor ayant le plus grand numéro.
 	timeval* mtimeout;
 };
