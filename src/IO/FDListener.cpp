@@ -7,21 +7,11 @@
 
 #include "FDListener.h"
 
-
 FDListener::FDListener() {
 	mtimeout = nullptr;
 	mfdmax = 0;
 	mfdwatched = std::vector<FDCommunication*>();
 	FD_ZERO(&mfdset);
-
-	sigset_t mask;
-
-	sigemptyset (&mask);
-	sigaddset (&mask, SIGTERM);
-
-	if (sigprocmask(SIG_BLOCK, &mask, &morig_mask) < 0) {
-		perror ("sigprocmask");
-	}
 }
 
 void FDListener::addFD(FDCommunication* newFD) {
@@ -47,8 +37,6 @@ void FDListener::listen() throw(IOException) {
 		FD_SET((*it)->getFD(), &mfdset);
 	}
 
-	int res;
-
 	/* int select (int nfds, fd_set *read-fds, fd_set *write-fds, fd_set *except-fds, struct timeval *timeout)
 	 *
 	 * Gros conseil pour mieux comprendre : "man select" dans la console linux.
@@ -64,14 +52,12 @@ void FDListener::listen() throw(IOException) {
 	 * Si on met NULL, il attendra indéfiniment un FD. Il faut donc lui envoyé une structure initialisiée
 	 * à 0 seconde et 0 useconde pour que se soit instantané.
 	 */
-	res = pselect(mfdmax + 1, &mfdset, nullptr, nullptr, nullptr, &morig_mask);
-	if (res < 0 && errno != EINTR) {
-		perror ("select");
+	if(::select(mfdmax + 1, &mfdset, nullptr, nullptr, mtimeout) == -1) {
 		throw IOException();
 	}
+
 }
 
 bool FDListener::isFDReceiving(FDCommunication* FD) {
 	return FD_ISSET(FD->getFD(), &mfdset);
 }
-
