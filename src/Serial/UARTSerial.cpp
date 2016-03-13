@@ -8,7 +8,7 @@
 #include "UARTSerial.h"
 
 UARTSerial::UARTSerial() : FDCommunication() {
-	init();
+	//init();
 }
 
 
@@ -22,7 +22,7 @@ void UARTSerial::open(const std::string& device) throw(IOException) {
 		throw IOException();
 	}
 	else {
-		init();
+		//init();
 	}
 }
 

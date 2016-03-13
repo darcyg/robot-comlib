@@ -18,6 +18,7 @@ FDListener::FDListener() {
 
 	sigemptyset (&mask);
 	sigaddset (&mask, SIGTERM);
+	sigaddset (&mask, SIGINT);
 
 	if (sigprocmask(SIG_BLOCK, &mask, &morig_mask) < 0) {
 		perror ("sigprocmask");

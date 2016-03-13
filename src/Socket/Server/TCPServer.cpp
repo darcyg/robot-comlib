@@ -14,11 +14,14 @@ TCPServer::TCPServer() : TCPServerSocket(), mclients(), mevents(nullptr), mfdlis
 }
 
 TCPServer::~TCPServer() {
-	for (std::vector< TCPSocket* >::iterator it = mclients.begin() ; it != mclients.end(); ++it)
-	{
-		mclients.erase(it);
+	if(mclients.size() > 0) {
+		for (std::vector< TCPSocket* >::iterator it = mclients.begin() ; it != mclients.end(); ++it)
+		{
+			delete(*it);
+		}
 	}
-	mclients.clear();
+	mevents = nullptr;
+	mfdlistener = nullptr;
 }
 
 void TCPServer::launch(uint port, uint backlog) {

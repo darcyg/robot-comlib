@@ -7,8 +7,7 @@
 
 #include "FDCommunication.h"
 
-FDCommunication::FDCommunication() {
-	mfd = 0;
+FDCommunication::FDCommunication() : mfd(0) {
 }
 
 uint FDCommunication::read(void* buf, uint size) throw(IOException) {
@@ -55,5 +54,5 @@ uint FDCommunication::getReadSize()  throw(IOException) {
 }
 
 bool FDCommunication::isClosed() {
-	return mfd == 0;
+	return mfd <= 0;
 }
