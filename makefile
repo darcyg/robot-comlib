@@ -1,3 +1,8 @@
+CC=$(CROSS_COMPILE)g++
+
+ARCH?=i86
+INSTALL_DIR?=/usr/
+
 SRCDIR := src
 
 #All directories that contain sourcefiles
@@ -21,31 +26,27 @@ LIBNAME = robot-comlib
 
 BINARY := lib$(LIBNAME).so
 
-LIB_INSTALL_DIR := /usr/lib
-INC_INSTALL_DIR := /usr/include/$(LIBNAME)
+LIB_INSTALL_DIR := $(INSTALL_DIR)lib
+INC_INSTALL_DIR := $(INSTALL_DIR)include/$(LIBNAME)
 
 %.o: %.cpp
-	g++ -Wall -c -std=c++0x -fPIC -pthread -o "$@" "$<"
+	$(CC) -Wall -c -std=c++0x -fPIC -pthread -o "$@" "$<"
 
-binary: $(OBJS)
-	g++ -shared -o $(BINARY) $(OBJS) -l $(LIBS)
-
-clean_obj:
-	rm $(OBJS)
-
-all: binary clean_obj
+all: $(OBJS)
+	$(CC) -shared -o build/$(ARCH)/$(BINARY) $(OBJS) -l $(LIBS)
 
 clean:
-	rm $(BINARY)
+	-rm $(OBJS)
+	-rm build/$(ARCH)/$(BINARY)
 
 install:
-	cp $(BINARY) $(LIB_INSTALL_DIR)/$(BINARY)
-	mkdir $(INC_INSTALL_DIR)
-	mkdir $(INC_INSTALL_DIR)/IO
-	mkdir $(INC_INSTALL_DIR)/Serial
-	mkdir $(INC_INSTALL_DIR)/Socket
-	mkdir $(INC_INSTALL_DIR)/Socket/Client
-	mkdir $(INC_INSTALL_DIR)/Socket/Server
+	cp build/$(ARCH)/$(BINARY) $(LIB_INSTALL_DIR)/$(BINARY)
+	-mkdir $(INC_INSTALL_DIR)
+	-mkdir $(INC_INSTALL_DIR)/IO
+	-mkdir $(INC_INSTALL_DIR)/Serial
+	-mkdir $(INC_INSTALL_DIR)/Socket
+	-mkdir $(INC_INSTALL_DIR)/Socket/Client
+	-mkdir $(INC_INSTALL_DIR)/Socket/Server
 	cp src/IO/*.h $(INC_INSTALL_DIR)/IO
 	cp src/Serial/*.h $(INC_INSTALL_DIR)/Serial
 	cp src/Socket/*.h $(INC_INSTALL_DIR)/Socket
@@ -53,5 +54,5 @@ install:
 	cp src/Socket/Client/*.h $(INC_INSTALL_DIR)/Socket/Client
 	
 uninstall:
-	rm -r $(INC_INSTALL_DIR)
-	rm $(LIB_INSTALL_DIR)/$(BINARY)
+	-rm -r $(INC_INSTALL_DIR)
+	-rm $(LIB_INSTALL_DIR)/$(BINARY)
