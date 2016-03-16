@@ -28,6 +28,8 @@ public:
 
 	void listen() throw(IOException);
 
+	void blocksig();
+
 	bool isFDReceiving(FDCommunication* FD);
 
 
@@ -38,6 +40,7 @@ private:
 	sigset_t morig_mask;
 	int mfdmax; //File descriptor ayant le plus grand numéro.
 	timeval* mtimeout;
+	bool mblock;
 };
 
 #endif /* FDLISTENER_H_ */

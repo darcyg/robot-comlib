@@ -8,21 +8,11 @@
 #include "FDListener.h"
 
 
-FDListener::FDListener() {
+FDListener::FDListener() : mblock(false) {
 	mtimeout = nullptr;
 	mfdmax = 0;
 	mfdwatched = std::vector<FDCommunication*>();
 	FD_ZERO(&mfdset);
-
-	sigset_t mask;
-
-	sigemptyset (&mask);
-	sigaddset (&mask, SIGTERM);
-	sigaddset (&mask, SIGINT);
-
-	if (sigprocmask(SIG_BLOCK, &mask, &morig_mask) < 0) {
-		perror ("sigprocmask");
-	}
 }
 
 void FDListener::addFD(FDCommunication* newFD) {
@@ -65,14 +55,30 @@ void FDListener::listen() throw(IOException) {
 	 * Si on met NULL, il attendra indéfiniment un FD. Il faut donc lui envoyé une structure initialisiée
 	 * à 0 seconde et 0 useconde pour que se soit instantané.
 	 */
-	res = pselect(mfdmax + 1, &mfdset, nullptr, nullptr, nullptr, &morig_mask);
+	if(mblock)
+		res = pselect(mfdmax + 1, &mfdset, nullptr, nullptr, nullptr, &morig_mask);
+	else
+		res = select(mfdmax + 1, &mfdset, nullptr, nullptr, nullptr);
+
 	if (res < 0 && errno != EINTR) {
 		perror ("select");
 		throw IOException();
 	}
 }
 
+void FDListener::blocksig() {
+	mblock = true;
+	sigset_t mask;
+
+	sigemptyset (&mask);
+	sigaddset (&mask, SIGTERM);
+	sigaddset (&mask, SIGINT);
+
+	if (sigprocmask(SIG_BLOCK, &mask, &morig_mask) < 0) {
+		perror ("sigprocmask");
+	}
+}
+
 bool FDListener::isFDReceiving(FDCommunication* FD) {
 	return FD_ISSET(FD->getFD(), &mfdset);
 }
-
