@@ -21,7 +21,7 @@ BUILD_DIR := build/$(ARCH)
 
 OBJS := $(SRCS:.cpp=.o)
 
-OBJS_LINK := $(addprefix $(BUILD_DIR)/, $(notdir $(OBJS)))
+OBJS_LINK := $(addprefix $(BUILD_DIR)/, $(OBJS))
 
 INC := $(SRCS:.cpp=.h)
 
@@ -35,16 +35,16 @@ LIB_INSTALL_DIR := $(INSTALL_DIR)lib
 INC_INSTALL_DIR := $(INSTALL_DIR)include/$(LIBNAME)
 
 $(BUILD_DIR)/%.o: %.cpp
-	$(CC) -Wall -c -std=c++0x -fPIC -pthread -o $@ $(SRCDIR)/$<
+	$(CC) -Wall -c -std=c++0x -fPIC -pthread -o $@ $<
 
 all: create_dir $(OBJS_LINK)
 	$(CC) -shared -o $(BUILD_DIR)/$(BINARY) $(OBJS_LINK) -l $(LIBS)
 
 clean:
-	-rm build/$(ARCH)/*
+	-rm -r build/$(ARCH)/*
 
 create_dir:
-	-@mkdir build $(BUILD_DIR) $(addprefix $(BUILD_DIR)/,$(SUBDIRS)) 2> /dev/null || true
+	-@mkdir build $(BUILD_DIR) $(BUILD_DIR)/$(SRCDIR) $(addprefix $(BUILD_DIR)/$(SRCDIR)/,$(SUBDIRS)) 2> /dev/null || true
 
 install:
 	cp $(BUILD_DIR)/$(BINARY) $(LIB_INSTALL_DIR)/$(BINARY)

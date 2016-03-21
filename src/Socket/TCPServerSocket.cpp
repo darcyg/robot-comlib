@@ -21,6 +21,8 @@ TCPServerSocket::TCPServerSocket() throw(SocketException) {
 	if(mfd == -1) {
 		throw SocketException();
 	}
+
+	setsockopt(mfd, SOL_SOCKET, SO_REUSEADDR, NULL, NULL);
 }
 
 TCPServerSocket::~TCPServerSocket() {
