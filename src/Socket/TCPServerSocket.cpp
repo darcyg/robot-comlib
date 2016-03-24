@@ -18,11 +18,13 @@ TCPServerSocket::TCPServerSocket() throw(SocketException) {
 	 */
 	mfd = ::socket(AF_INET, SOCK_STREAM, 0);
 
+	int enable = 1;
+
 	if(mfd == -1) {
 		throw SocketException();
 	}
 
-	setsockopt(mfd, SOL_SOCKET, SO_REUSEADDR, NULL, NULL);
+	setsockopt(mfd, SOL_SOCKET, SO_REUSEADDR, &enable, sizeof(int));
 }
 
 TCPServerSocket::~TCPServerSocket() {
