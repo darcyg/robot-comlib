@@ -32,13 +32,8 @@ public:
 
 	void open(const std::string& device) throw(IOException);
 
-	void setBaudRate(uint baudrate) {mbaudrate = baudrate;}
-
-
 private:
 	void init();
-
-	uint mbaudrate = B9600;
 
 protected:
 
