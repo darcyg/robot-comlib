@@ -35,6 +35,10 @@ void TCPClient::launch(std::string address, int port) {
 	}
 }
 
+void TCPClient::join() {
+	mthread->join();
+}
+
 bool TCPClient::isConnected() {
 	return mrunning;
 }

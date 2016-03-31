@@ -21,6 +21,8 @@ public:
 
 	void launch(std::string address, int port);
 
+	void join();
+
 	bool isConnected();
 
 	class Events {
